@@ -4,12 +4,21 @@ jest.mock('./boardDrawer');
 
 describe('GameBoard', () => {
   beforeEach(() => {
-    boardDrawer = new BoardDrawer;
-    gameBoard = new GameBoard(boardDrawer);
+    mockBoardDrawer = new BoardDrawer;
+    gameBoard = new GameBoard(mockBoardDrawer);
   });
 
   it('initialises with a board with no plays', () => {
     expect(gameBoard.board)
         .toEqual([' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']);
+  });
+
+  describe('#printBoard()', () => {
+    it('calls printBoard mehtod on boardDrawer', () => {
+      gameBoard.printBoard();
+
+      expect(mockBoardDrawer.printBoard)
+          .toHaveBeenCalledWith(gameBoard.board);
+    });
   });
 });
